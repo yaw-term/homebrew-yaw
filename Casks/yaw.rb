@@ -1,8 +1,8 @@
 cask "yaw" do
-  version "0.9.51"
-  sha256 "1503e9265ffefc4c00a7a1a106b0b4d2723237ae57281af86cb843c923eaa47f"
+  version "0.9.52"
+  sha256 "ac6651d18bbe0381fbef6f2e194cebd7cced21f1bceaed0c4f7c86e99eff0b7a"
 
-  url "https://yaw.sh/downloads/yaw-#{version}-mac-x64.zip"
+  url "https://yaw.sh/downloads/yaw-darwin-x64-#{version}.zip"
   name "yaw"
   desc "A modern terminal with built-in connection management and AI assistance"
   homepage "https://yaw.sh"
