@@ -1,8 +1,14 @@
 cask "yaw" do
-  version "0.9.77"
-  sha256 "85242b7565c49d8a4bd89ac80acdd2755e93275fc6a003d663e4c7fc11fb9f8f"
+  arch arm: "arm64", intel: "x64"
+  version "0.9.78"
 
-  url "https://yaw.sh/downloads/yaw-darwin-arm64-#{version}.zip"
+  if Hardware::CPU.arm?
+    sha256 "d237f299ab75301b3b9109ca3cf13dd37a4d62e49fd84ba3ba214a4c23b5fe46"
+  else
+    sha256 "3be09aac90862671be2826a82e00f416fd0da901db375ed65f0982b0523192fc"
+  end
+
+  url "https://yaw.sh/downloads/yaw-darwin-#{arch}-#{version}.zip"
   name "yaw"
   desc "A modern terminal with built-in connection management and AI assistance"
   homepage "https://yaw.sh"
