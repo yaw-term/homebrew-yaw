@@ -8,7 +8,7 @@ cask "yaw" do
     sha256 "db4f3d5c884b4e20171b85564a0661818da0c1bbfd1c40df48f685a9eb2c7a39"
   end
 
-  url "https://yaw.sh/downloads/yaw-darwin-#{arch}-#{version}.zip"
+  url "https://downloads.yaw.sh/yaw-darwin-#{arch}-#{version}.zip"
   name "yaw"
   desc "A modern terminal with built-in connection management and AI assistance"
   homepage "https://yaw.sh"
