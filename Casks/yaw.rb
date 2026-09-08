@@ -1,17 +1,28 @@
 cask "yaw" do
-  arch arm: "arm64", intel: "x64"
   version "2.0.35"
-
-  if Hardware::CPU.arm?
   sha256 "9b3175b458f3001bafddac7f78d20194a1adbe98548174f277f8f092ae911bc6"
-  else
-    sha256 "4357b4f401998b72d2cce3c27dbf0aa7e3b6e293bb8bbbeabf16057dd3f57a99"
-  end
 
-  url "https://downloads.yaw.sh/yaw-darwin-#{arch}-#{version}.zip"
+  url "https://downloads.yaw.sh/yaw-darwin-arm64-#{version}.zip"
   name "yaw"
   desc "A modern terminal with built-in connection management and AI assistance"
   homepage "https://yaw.sh"
+
+  # Apple Silicon only. No mac-x64 artifact has been published since Intel was
+  # deprecated: scripts/build-platforms-tailnet.sh pulls only darwin/arm64,
+  # release.sh computes no Intel hash and its cask rewriter assumes a single
+  # checksum line, and the app's own updater blocks Intel through
+  # isDeprecatedMacX64() (src/auto-updater.ts) precisely because the download
+  # would 404.
+  #
+  # This cask was the last artifact still claiming Intel support. It carried an
+  # `arch arm: "arm64", intel: "x64"` stanza and a two-branch checksum block, so
+  # on an Intel Mac it resolved the URL to yaw-darwin-x64-<version>.zip -- which
+  # has never been built -- against a checksum frozen at an ancient release,
+  # because the release rewriter only ever updates the first branch. The failure
+  # surfaced as a download 404 at the moment a new user tried to install.
+  # depends_on turns that into Homebrew's own clear unsupported-architecture
+  # message instead.
+  depends_on arch: :arm64
 
   app "yaw.app"
 
